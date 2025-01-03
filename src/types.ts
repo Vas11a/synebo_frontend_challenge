@@ -3,3 +3,5 @@ export type ITodo = {
     title: string;
     isActive: boolean;
 }
+
+export type IFilters = 'all' | 'active' | 'completed';
