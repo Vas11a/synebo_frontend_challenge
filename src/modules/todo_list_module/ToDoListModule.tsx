@@ -75,7 +75,7 @@ export default function ToDoListModule() {
                         removeTodo={removeTodo}
                         moveTodo={moveTodo}
                     />
-                    <div className='flex justify-center md:justify-between flex-wrap gap-3 sm:gap-8 items-center px-3 sm:px-5 border-gray-200 text-gray-500 font-medium sm:py-2 py-4'>
+                    <div className='flex justify-center md:justify-between flex-wrap gap-5 sm:gap-8 items-center px-3 sm:px-5 border-gray-200 text-gray-500 font-medium sm:py-2 py-4'>
                         <div>{countActiveTodos()}</div>
                         <Filters filters={filters} currentFilter={currentFilter} setCurrentFilter={setCurrentFilter} />
                         <span className='cursor-pointer duration-500 hover:text-black' onClick={clearCompleted}>
