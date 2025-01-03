@@ -1,15 +1,14 @@
 import React from "react";
 
 interface IconProps {
-  size?: number;
+  className?: string;
   color?: string;
 }
 
-const MoonIcon: React.FC<IconProps> = ({ size = 32, color = "#000000" }) => {
+const MoonIcon: React.FC<IconProps> = ({ className, color = "#000000" }) => {
   return (
     <svg
-      width={size}
-      height={size}
+      className={className}
       viewBox="-5 0 32 32"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"

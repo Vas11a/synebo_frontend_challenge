@@ -8,7 +8,7 @@ interface Props {
 }
 export default function RadioButton({ id, isChecked, onChange }: Props) {
     return (
-        <div className="custom-radio">
+        <div className="custom-radio ">
             <div>
                 <input className='radio-input' type="checkbox" id={id} checked={isChecked} onChange={onChange} />
                 <label className='radio-label' htmlFor={id}>

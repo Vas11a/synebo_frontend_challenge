@@ -34,18 +34,18 @@ export default function AddNewTodo({ addNewTodo }: Props) {
     };
 
     return (
-        <div className='w-full rounded-md bg-white py-3 px-5 flex justify-between gap-5 items-center'>
+        <div className='w-full rounded-md bg-white py-2 px-3 sm:py-3 sm:px-5 flex justify-between gap-2 sm:gap-5 items-center'>
             <RadioButton id="add-todo" isChecked={isChecked} onChange={(event) => setIsChecked(event.target.checked)} />
             <input 
                 onChange={(event) => setTitle(event.target.value)} 
                 value={title} 
                 type="text" 
                 placeholder='Create a new todo' 
-                className='flex-1 focus:outline-none text-xl' 
+                className='focus:outline-none w-full text-lg sm:text-xl' 
                 onKeyDown={handleKeyDown}
             />
             <div className='cursor-pointer duration-500 hover:rotate-180' onClick={handleAddTodo}>
-                <PlusIcon size={38} color="#AF65EB" />
+                <PlusIcon clasName=' w-8 h-8 sm:w-10 sm:h-10' color="#AF65EB" />
             </div>
         </div>
     );

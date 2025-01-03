@@ -66,7 +66,7 @@ export default function ToDoListModule() {
 
     return (
         <DndProvider backend={isMobile ? TouchBackend : HTML5Backend}>
-            <div className='pt-10'>
+            <div className=' pt-5 sm:pt-10'>
                 <AddNewTodo addNewTodo={addNewTodo} />
                 <div className='mt-5 w-full rounded-md bg-white border border-gray-200 shadow-lg'>
                     <List
@@ -75,7 +75,7 @@ export default function ToDoListModule() {
                         removeTodo={removeTodo}
                         moveTodo={moveTodo}
                     />
-                    <div className='flex justify-between gap-5 items-center px-5 border-gray-200 text-gray-500 font-medium pt-4 pb-4'>
+                    <div className='flex justify-center md:justify-between flex-wrap gap-3 sm:gap-8 items-center px-3 sm:px-5 border-gray-200 text-gray-500 font-medium sm:py-2 py-4'>
                         <div>{countActiveTodos()}</div>
                         <Filters filters={filters} currentFilter={currentFilter} setCurrentFilter={setCurrentFilter} />
                         <span className='cursor-pointer duration-500 hover:text-black' onClick={clearCompleted}>

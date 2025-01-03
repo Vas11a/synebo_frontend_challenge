@@ -1,15 +1,14 @@
 import React from "react";
 
 interface IconProps {
-    size?: number;
+    clasName?: string;
     color?: string;
 }
 
-const PlusIcon: React.FC<IconProps> = ({ size = 32, color = "#000000" }) => {
+const PlusIcon: React.FC<IconProps> = ({ clasName, color = "#000000" }) => {
     return (
         <svg
-            width={size}
-            height={size}
+            className={clasName}
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

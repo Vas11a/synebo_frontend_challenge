@@ -1,18 +1,18 @@
 .custom-radio {
-    display: inline-block;
+  display: inline-block;
 }
 
 .custom-radio .radio-input[type="checkbox"] {
   display: none;
 }
 
-.custom-radio .radio-input[type="checkbox"] + .radio-label {
+.custom-radio .radio-input[type="checkbox"]+.radio-label {
   color: #333;
   font-family: Arial, sans-serif;
   font-size: 14px;
 }
 
-.custom-radio .radio-input[type="checkbox"] + .radio-label .radio-span {
+.custom-radio .radio-input[type="checkbox"]+.radio-label .radio-span {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -30,16 +30,28 @@
 }
 
 
-.custom-radio .radio-input[type="checkbox"]:checked + .radio-label .radio-span {
+.custom-radio .radio-input[type="checkbox"]:checked+.radio-label .radio-span {
   background: rgb(128, 174, 249);
   background: linear-gradient(167deg, rgba(128, 174, 249, 1) 0%, rgba(162, 124, 244, 1) 100%);
 }
 
-.custom-radio .radio-input[type="checkbox"]:checked + .radio-label .radio-span .mark-icon {
+.custom-radio .radio-input[type="checkbox"]:checked+.radio-label .radio-span .mark-icon {
   opacity: 1;
 }
 
-.custom-radio .radio-input[type="checkbox"] + .radio-label .radio-span .mark-icon {
+.custom-radio .radio-input[type="checkbox"]+.radio-label .radio-span .mark-icon {
   opacity: 0;
   transition: all 0.5s ease;
+}
+
+@media (max-width: 640px) {
+  .custom-radio .radio-input[type="checkbox"]+.radio-label .radio-span {
+    width: 20px;
+    height: 20px;
+    margin-top: -5px;
+  }
+
+  .custom-radio .radio-input[type="checkbox"]+.radio-label {
+    font-size: 12px;
+  }
 }
