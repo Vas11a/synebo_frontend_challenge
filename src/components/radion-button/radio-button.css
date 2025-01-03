@@ -1,0 +1,45 @@
+.custom-radio {
+    display: inline-block;
+}
+
+.custom-radio .radio-input[type="checkbox"] {
+  display: none;
+}
+
+.custom-radio .radio-input[type="checkbox"] + .radio-label {
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.custom-radio .radio-input[type="checkbox"] + .radio-label .radio-span {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  margin: -1px 4px 0 0;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 2px solid lightgray;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: white;
+  transition: background-color 0.5s ease;
+}
+
+
+.custom-radio .radio-input[type="checkbox"]:checked + .radio-label .radio-span {
+  background: rgb(128, 174, 249);
+  background: linear-gradient(167deg, rgba(128, 174, 249, 1) 0%, rgba(162, 124, 244, 1) 100%);
+}
+
+.custom-radio .radio-input[type="checkbox"]:checked + .radio-label .radio-span .mark-icon {
+  opacity: 1;
+}
+
+.custom-radio .radio-input[type="checkbox"] + .radio-label .radio-span .mark-icon {
+  opacity: 0;
+  transition: all 0.5s ease;
+}
