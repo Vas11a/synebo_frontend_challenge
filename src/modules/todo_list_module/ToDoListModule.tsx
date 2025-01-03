@@ -13,7 +13,7 @@ export default function ToDoListModule() {
     const [currentFilter, setCurrentFilter] = useState<IFilter>('all');
 
     useEffect(() => {
-        const storedTodos = localStorage.getItem('todos');
+        const storedTodos = localStorage.getItem('todoListVasylPanov');
         if (storedTodos) {
             setTodos(JSON.parse(storedTodos));
         }
@@ -21,7 +21,7 @@ export default function ToDoListModule() {
 
     useEffect(() => {
         if (todos.length > 0) {
-            localStorage.setItem('todos', JSON.stringify(todos));
+            localStorage.setItem('todoListVasylPanov', JSON.stringify(todos));
         }
     }, [todos]);
 
