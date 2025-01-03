@@ -4,4 +4,4 @@ export type ITodo = {
     isActive: boolean;
 }
 
-export type IFilters = 'all' | 'active' | 'completed';
+export type IFilter = 'all' | 'active' | 'completed';

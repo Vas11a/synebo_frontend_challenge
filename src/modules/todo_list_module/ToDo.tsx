@@ -4,9 +4,10 @@ import RemoveIcon from "../../assets/RemoveIcon"
 
 interface Props {
     todo: ITodo;
-    changeStatus: (id: string) => void
-    removeTodo: (id: string) => void
+    changeStatus: (id: string) => void;
+    removeTodo: (id: string) => void;
 }
+
 export default function ToDo({ todo, changeStatus, removeTodo }: Props) {
   return (
     <div className='flex justify-between gap-5 items-center border-b-2 px-5  border-gray-200 pt-4 pb-4'>

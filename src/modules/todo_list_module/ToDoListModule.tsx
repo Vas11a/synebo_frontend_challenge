@@ -1,11 +1,27 @@
 import AddNewTodo from './AddNewTodo';
-import { useState } from 'react';
-import { IFilters, ITodo } from '../../types';
-import ToDo from './ToDo';
+import { useState, useEffect } from 'react';
+import { IFilter, ITodo } from '../../types';
+import List from './List';
+import Filters from './Filters';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 export default function ToDoListModule() {
     const [todos, setTodos] = useState<ITodo[]>([]);
-    const [currentFilter, setCurrentFilter] = useState<IFilters>('all');
+    const [currentFilter, setCurrentFilter] = useState<IFilter>('all');
+
+    useEffect(() => {
+        const storedTodos = localStorage.getItem('todos');
+        if (storedTodos) {
+            setTodos(JSON.parse(storedTodos));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (todos.length > 0) {
+            localStorage.setItem('todos', JSON.stringify(todos));
+        }
+    }, [todos]);
 
     const addNewTodo = (todo: ITodo) => {
         setTodos(prevTodos => [...prevTodos, todo]);
@@ -37,40 +53,35 @@ export default function ToDoListModule() {
         return true;
     });
 
-    const filters: IFilters[] = ['all', 'active', 'completed'];
+    const filters: IFilter[] = ['all', 'active', 'completed'];
+
+    const moveTodo = (fromIndex: number, toIndex: number) => {
+        const reorderedTodos = [...todos];
+        const [movedTodo] = reorderedTodos.splice(fromIndex, 1);
+        reorderedTodos.splice(toIndex, 0, movedTodo);
+        setTodos(reorderedTodos);
+    };
 
     return (
-        <div className='pt-10'>
-            <AddNewTodo addNewTodo={addNewTodo} />
-            <div className='mt-5 w-full rounded-md bg-white border border-gray-200 shadow-lg'>
-                <div className='flex flex-col max-h-[400px] overflow-y-auto'>
-                    {filteredTodos.map(todo => (
-                        <ToDo
-                            key={todo.id}
-                            todo={todo}
-                            changeStatus={changeStatus}
-                            removeTodo={removeTodo}
-                        />
-                    ))}
-                </div>
-                <div className='flex justify-between gap-5 items-center px-5 border-gray-200 text-gray-500 font-medium pt-4 pb-4'>
-                    <div>{countActiveTodos()}</div>
-                    <div className='flex gap-5 items-center'>
-                        {filters.map(filter => (
-                            <span
-                                key={filter}
-                                className={`cursor-pointer ${currentFilter === filter ? 'text-blue-500' : ''}`}
-                                onClick={() => setCurrentFilter(filter)}
-                            >
-                                {filter.charAt(0).toUpperCase() + filter.slice(1)}
-                            </span>
-                        ))}
+        <DndProvider backend={HTML5Backend}>
+            <div className='pt-10'>
+                <AddNewTodo addNewTodo={addNewTodo} />
+                <div className='mt-5 w-full rounded-md bg-white border border-gray-200 shadow-lg'>
+                    <List
+                        filteredTodos={filteredTodos}
+                        changeStatus={changeStatus}
+                        removeTodo={removeTodo}
+                        moveTodo={moveTodo}
+                    />
+                    <div className='flex justify-between gap-5 items-center px-5 border-gray-200 text-gray-500 font-medium pt-4 pb-4'>
+                        <div>{countActiveTodos()}</div>
+                        <Filters filters={filters} currentFilter={currentFilter} setCurrentFilter={setCurrentFilter} />
+                        <span className='cursor-pointer duration-500 hover:text-black' onClick={clearCompleted}>
+                            Clear Completed
+                        </span>
                     </div>
-                    <span className='cursor-pointer' onClick={clearCompleted}>
-                        Clear Completed
-                    </span>
                 </div>
             </div>
-        </div>
+        </DndProvider>
     );
 }
