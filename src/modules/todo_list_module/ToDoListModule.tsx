@@ -1,10 +1,12 @@
-import AddNewTodo from './AddNewTodo';
-import { useState, useEffect } from 'react';
-import { IFilter, ITodo } from '../../types';
-import List from './List';
-import Filters from './Filters';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
+import { isMobile } from 'react-device-detect';
+import AddNewTodo from './AddNewTodo';
+import List from './List';
+import Filters from './Filters';
+import { useState, useEffect } from 'react';
+import { IFilter, ITodo } from '../../types';
 
 export default function ToDoListModule() {
     const [todos, setTodos] = useState<ITodo[]>([]);
@@ -23,47 +25,42 @@ export default function ToDoListModule() {
         }
     }, [todos]);
 
-    const addNewTodo = (todo: ITodo) => {
-        setTodos(prevTodos => [...prevTodos, todo]);
-    };
+    const addNewTodo = (todo: ITodo) => setTodos((prev) => [...prev, todo]);
 
     const changeStatus = (id: string) => {
-        setTodos(prevTodos => prevTodos.map(todo => todo.id === id
-            ? { ...todo, isActive: !todo.isActive }
-            : todo
-        ));
+        setTodos((prev) =>
+            prev.map((todo) =>
+                todo.id === id ? { ...todo, isActive: !todo.isActive } : todo
+            )
+        );
     };
 
-    const removeTodo = (id: string) => {
-        setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
-    };
+    const removeTodo = (id: string) => setTodos((prev) => prev.filter((todo) => todo.id !== id));
 
-    const clearCompleted = () => {
-        setTodos(prevTodos => prevTodos.filter(todo => todo.isActive));
-    };
+    const clearCompleted = () => setTodos((prev) => prev.filter((todo) => todo.isActive));
 
     const countActiveTodos = () => {
-        const activeTodos = todos.filter(todo => todo.isActive).length;
-        return `${activeTodos} item${activeTodos === 1 ? '' : 's'} left`;
+        const activeCount = todos.filter((todo) => todo.isActive).length;
+        return `${activeCount} item${activeCount === 1 ? '' : 's'} left`;
     };
 
-    const filteredTodos = todos.filter(todo => {
+    const filteredTodos = todos.filter((todo) => {
         if (currentFilter === 'completed') return !todo.isActive;
         if (currentFilter === 'active') return todo.isActive;
         return true;
     });
 
-    const filters: IFilter[] = ['all', 'active', 'completed'];
-
     const moveTodo = (fromIndex: number, toIndex: number) => {
-        const reorderedTodos = [...todos];
-        const [movedTodo] = reorderedTodos.splice(fromIndex, 1);
-        reorderedTodos.splice(toIndex, 0, movedTodo);
-        setTodos(reorderedTodos);
+        const updatedTodos = [...todos];
+        const [movedTodo] = updatedTodos.splice(fromIndex, 1);
+        updatedTodos.splice(toIndex, 0, movedTodo);
+        setTodos(updatedTodos);
     };
 
+    const filters: IFilter[] = ['all', 'active', 'completed'];
+
     return (
-        <DndProvider backend={HTML5Backend}>
+        <DndProvider backend={isMobile ? TouchBackend : HTML5Backend}>
             <div className='pt-10'>
                 <AddNewTodo addNewTodo={addNewTodo} />
                 <div className='mt-5 w-full rounded-md bg-white border border-gray-200 shadow-lg'>
