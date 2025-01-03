@@ -10,7 +10,7 @@ interface Props {
 
 export default function List({ filteredTodos, changeStatus, removeTodo, moveTodo }: Props) {
     return (
-        <div className='flex flex-col max-h-[300px] sm:max-h-[400px] overflow-y-auto'>
+        <div className='flex flex-col max-h-[200px] sm:max-h-[400px] overflow-y-auto'>
             {filteredTodos.map((todo, index) => (
                 <TodoItemContainer
                     key={todo.id}
