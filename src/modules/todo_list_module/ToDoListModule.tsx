@@ -51,12 +51,17 @@ export default function ToDoListModule() {
     });
 
     const moveTodo = (fromIndex: number, toIndex: number) => {
-        const updatedTodos = [...todos];
-        const [movedTodo] = updatedTodos.splice(fromIndex, 1);
-        updatedTodos.splice(toIndex, 0, movedTodo);
-        setTodos(updatedTodos);
+        const originalFromIndex = todos.findIndex(todo => todo.id === filteredTodos[fromIndex].id);
+        const originalToIndex = todos.findIndex(todo => todo.id === filteredTodos[toIndex].id);
+    
+        if (originalFromIndex !== -1 && originalToIndex !== -1) {
+            const reorderedTodos = [...todos];
+            const [movedTodo] = reorderedTodos.splice(originalFromIndex, 1);
+            reorderedTodos.splice(originalToIndex, 0, movedTodo);
+            setTodos(reorderedTodos);
+        }
     };
-
+    
     const filters: IFilter[] = ['all', 'active', 'completed'];
 
     return (
