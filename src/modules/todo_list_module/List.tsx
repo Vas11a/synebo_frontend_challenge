@@ -21,6 +21,11 @@ export default function List({ filteredTodos, changeStatus, removeTodo, moveTodo
                     moveTodo={moveTodo}
                 />
             ))}
+            {
+                filteredTodos.length === 0 && (
+                    <div className='border-b-2 px-3 sm:px-5 text-gray-500 text-center border-gray-200 pt-3 pb-3 sm:pt-4 sm:pb-4'>No todos found</div>
+                )
+            }
         </div>
     );
 }
